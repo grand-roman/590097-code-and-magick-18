@@ -1,6 +1,6 @@
 'use strict';
 
-window.renderStatistics = function(ctx,names,times) {
+window.renderStatistics = function (ctx, names, times) {
 
   var statCloud = {
 
@@ -15,12 +15,12 @@ window.renderStatistics = function(ctx,names,times) {
     cloudText: ['Ура вы победили!', 'Список результатов: ']
   };
 
-  function renderCloud(x, y, cWidth, cHeight, color) {
+  function renderCloud (x, y, cWidth, cHeight, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, cWidth, cHeight);
   }
 
-  function writeText(textArray) {
+  function writeText (textArray) {
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
 
@@ -29,7 +29,7 @@ window.renderStatistics = function(ctx,names,times) {
     }
   }
 
-  function renderHistogram(names, times){
+  function renderHistogram (histogramNames, histogramTimes) {
 
     var statHistogram = {
 
@@ -42,27 +42,27 @@ window.renderStatistics = function(ctx,names,times) {
 
     };
 
-    var step = statHistogram.histogramHeight / (getMaxElement(times) - 0);
+    var step = statHistogram.histogramHeight / (getMaxElement(histogramTimes) - 0);
     var initialX = statCloud.cloudX + statCloud.cloudMargin;
     var initialY = statCloud.cloudY + statHistogram.histogramHeight + statHistogram.indentName + statHistogram.indentTime + statHistogram.paddingTop;
 
-    for (var i = 0; i < names.length; i++) {
-      statHistogram.barHeight = times[i] * step;
-      var getY = initialY - times[i] * step;
+    for (var i = 0; i < histogramNames.length; i++) {
+      statHistogram.barHeight = histogramTimes[i] * step;
+      var getY = initialY - histogramTimes[i] * step;
       var getX = initialX + statHistogram.indent * i;
 
-      ctx.fillStyle = fillBarColor(names[i]);
+      ctx.fillStyle = fillBarColor(histogramNames[i]);
 
 
       ctx.fillRect(getX, getY, statHistogram.barWidth, statHistogram.barHeight);
 
-      ctx.fillText(names[i], getX, initialY + statHistogram.indentName);
-      ctx.fillText(times[i].toFixed(0), getX, getY - statHistogram.indentTime);
+      ctx.fillText(histogramNames[i], getX, initialY + statHistogram.indentName);
+      ctx.fillText(histogramTimes[i].toFixed(0), getX, getY - statHistogram.indentTime);
 
     }
   }
 
-  function getMaxElement(array) {
+  function getMaxElement (array) {
     var max = -1;
     for (var i = 0; i < array.length; i++) {
       var value = array[i];
@@ -73,7 +73,7 @@ window.renderStatistics = function(ctx,names,times) {
     return max;
   }
 
-  function fillBarColor(namePlayer) {
+  function fillBarColor (namePlayer) {
     var randomOpacity = Math.random().toFixed(3) * 1.5;
     if (namePlayer === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
