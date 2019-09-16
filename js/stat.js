@@ -15,12 +15,12 @@ window.renderStatistics = function (ctx, names, times) {
     cloudText: ['Ура вы победили!', 'Список результатов: ']
   };
 
-  function renderCloud (x, y, cWidth, cHeight, color) {
+  function renderCloud(x, y, cWidth, cHeight, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, cWidth, cHeight);
   }
 
-  function writeText (textArray) {
+  function writeText(textArray) {
     ctx.fillStyle = '#000';
     ctx.font = '16px PT Mono';
 
@@ -29,7 +29,7 @@ window.renderStatistics = function (ctx, names, times) {
     }
   }
 
-  function renderHistogram (histogramNames, histogramTimes) {
+  function renderHistogram(histogramNames, histogramTimes) {
 
     var statHistogram = {
 
@@ -62,7 +62,7 @@ window.renderStatistics = function (ctx, names, times) {
     }
   }
 
-  function getMaxElement (array) {
+  function getMaxElement(array) {
     var max = -1;
     for (var i = 0; i < array.length; i++) {
       var value = array[i];
@@ -73,7 +73,7 @@ window.renderStatistics = function (ctx, names, times) {
     return max;
   }
 
-  function fillBarColor (namePlayer) {
+  function fillBarColor(namePlayer) {
     var randomOpacity = Math.random().toFixed(3) * 1.5;
     if (namePlayer === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
